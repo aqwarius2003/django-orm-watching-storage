@@ -28,3 +28,20 @@ class Visit(models.Model):
                 if self.leaved_at else 'not leaved'
             )
         )
+
+
+def is_visit_long(visit, minutes=60):
+    delta_minutes = visit.total_seconds() // 60  # отбрасываем остаток
+    return delta_minutes > minutes  # True-False
+
+
+def get_duration(visit):
+    if visit.leaved_at:
+        time_duration = visit.leaved_at - visit.entered_at
+    else:
+        time_duration = localtime() - visit.entered_at
+    return time_duration
+
+
+def format_duration(duration):
+    return datetime.timedelta(seconds=int(duration.total_seconds()))
