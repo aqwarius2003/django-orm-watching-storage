@@ -1,4 +1,7 @@
 from django.db import models
+from django.utils.timezone import localtime
+import datetime
+
 
 
 class Passcard(models.Model):
