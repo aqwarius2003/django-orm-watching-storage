@@ -9,7 +9,7 @@ from django.shortcuts import get_object_or_404
 def storage_information_view(request):
     # Программируем здесь
     visits = Visit.objects.filter(leaved_at=None)
-    get_object_or_404(visits)       # Если эту строку убрать, то ошибки 500 нет
+    get_object_or_404(visits)
 
     non_closed_visits = []
 
