@@ -1,7 +1,5 @@
 from django.db import models
 from django.utils.timezone import localtime
-import datetime
-
 
 
 class Passcard(models.Model):
@@ -34,7 +32,8 @@ class Visit(models.Model):
 
 
 def is_visit_long(visit, minutes=60):
-    delta_minutes = visit.total_seconds() // 60  # отбрасываем остаток
+    minutes_in_hour = 60
+    delta_minutes = visit.total_seconds() // minutes_in_hour
     return delta_minutes > minutes  # True-False
 
 
@@ -47,4 +46,15 @@ def get_duration(visit):
 
 
 def format_duration(duration):
-    return datetime.timedelta(seconds=int(duration.total_seconds()))
+    seconds = int(duration.total_seconds())
+    print(seconds)
+    hours, remainder = divmod(seconds, 3600)
+    minutes, seconds = divmod(remainder, 60)
+    time_string = ''
+    if hours > 0:
+        time_string += f'{hours} ч '
+    if minutes > 0:
+        time_string += f'{minutes} мин '
+    if seconds > 0:
+        time_string += f'{seconds} сек'
+    return time_string
