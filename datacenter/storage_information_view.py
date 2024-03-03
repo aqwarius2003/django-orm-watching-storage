@@ -1,14 +1,10 @@
 from datacenter.models import Visit
 from django.shortcuts import render
 from datacenter.models import format_duration, get_duration, is_visit_long
-from django.shortcuts import get_object_or_404
 
 
 def storage_information_view(request):
-    # Программируем здесь
     visits = Visit.objects.filter(leaved_at=None)
-    get_object_or_404(visits)
-
 
     non_closed_visits = []
 
@@ -17,13 +13,13 @@ def storage_information_view(request):
         duration = get_duration(visit)
         who_entered = visit.passcard
         entered_at = visit.entered_at
-        duratio = format_duration(duration)
+        duration = format_duration(duration)
         is_strange = is_visit_long(duration)
 
         non_closed_visits.append({
             'who_entered': who_entered,
             'entered_at': entered_at,
-            'duration': duratio,
+            'duration': duration,
             'is_strange': is_strange,
         })
 

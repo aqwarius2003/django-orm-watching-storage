@@ -47,14 +47,12 @@ def get_duration(visit):
 
 def format_duration(duration):
     seconds = int(duration.total_seconds())
-    print(seconds)
     hours, remainder = divmod(seconds, 3600)
     minutes, seconds = divmod(remainder, 60)
     time_string = ''
     if hours > 0:
         time_string += f'{hours} ч '
-    if minutes > 0:
-        time_string += f'{minutes} мин '
+    time_string += f'{minutes} мин '
     if seconds > 0:
         time_string += f'{seconds} сек'
     return time_string
