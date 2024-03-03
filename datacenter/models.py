@@ -34,7 +34,7 @@ class Visit(models.Model):
 def is_visit_long(visit, minutes=60):
     minutes_in_hour = 60
     delta_minutes = visit.total_seconds() // minutes_in_hour
-    return delta_minutes > minutes  # True-False
+    return delta_minutes > minutes
 
 
 def get_duration(visit):
